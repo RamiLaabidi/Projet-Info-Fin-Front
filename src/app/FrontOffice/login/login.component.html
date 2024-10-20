@@ -1,0 +1,97 @@
+<div class="container" id="container" [ngClass]="{ 'active': isLoginFormActive }">
+<!-- Sign-Up Form -->
+  <div class="form-container sign-up-container" *ngIf="!isLoginFormActive">
+    <form [formGroup]="signupForm" (ngSubmit)="signupSubmit()">
+      <h1>Créer un compte</h1>
+      <input required formControlName="nom" type="text" placeholder="Nom">
+      <div *ngIf="signupForm.get('nom')!.invalid && signupForm.get('nom')?.touched" class="error-msg">
+        Nom is required.
+      </div>
+      <input required formControlName="prenom" type="text" placeholder="Prenom">
+      <div *ngIf="signupForm.get('prenom')!.invalid && signupForm.get('prenom')?.touched" class="error-msg">
+        Prenom is required.
+      </div>
+
+      <input required formControlName="numCin" type="text" placeholder="num CIN">
+      <div *ngIf="signupForm.get('numCin')!.invalid && signupForm.get('numCin')?.touched" class="error-msg">
+        CIN must be exactly 8 digits.
+      </div>
+      <input required formControlName="dateDeNaissance" type="date" placeholder="Date de Naissance">
+      <div *ngIf="signupForm.get('dateDeNaissance')!.invalid && signupForm.get('dateDeNaissance')?.touched" class="error-msg">
+        Date de Naissance is required.
+      </div>
+
+      <input required formControlName="paysDeNaissance" type="text" placeholder="Pays de Naissance">
+      <div *ngIf="signupForm.get('paysDeNaissance')!.invalid && signupForm.get('paysDeNaissance')?.touched" class="error-msg">
+        Pays de Naissance is required.
+      </div>
+
+      <input required formControlName="nationalite" type="text" placeholder="Nationalité">
+      <div *ngIf="signupForm.get('nationalite')!.invalid && signupForm.get('nationalite')?.touched" class="error-msg">
+        Nationalité is required.
+      </div>
+
+      <input required formControlName="adress" type="text" placeholder="Adresse">
+      <div *ngIf="signupForm.get('adress')!.invalid && signupForm.get('adress')?.touched" class="error-msg">
+        Adresse is required.
+      </div>
+
+      <input required formControlName="codePostal" type="text" placeholder="Code Postal">
+      <div *ngIf="signupForm.get('codePostal')!.invalid && signupForm.get('codePostal')?.touched" class="error-msg">
+        Code Postal is required.
+      </div>
+
+      <input required formControlName="contact" type="text" placeholder="Contact">
+      <div *ngIf="signupForm.get('contact')!.invalid && signupForm.get('contact')?.touched" class="error-msg">
+        Contact is required.
+      </div>
+
+      <input required formControlName="mail" type="email" placeholder="Email">
+      <div *ngIf="signupForm.get('mail')!.invalid && signupForm.get('mail')?.touched" class="error-msg">
+        Email is invalid.
+      </div>
+
+      <input required formControlName="motDePasse" type="password" placeholder="Mot de Passe">
+      <div *ngIf="signupForm.get('motDePasse')!.invalid && signupForm.get('motDePasse')?.touched" class="error-msg">
+        Mot de Passe must be at least 6 characters.
+      </div>
+      <div *ngIf="signupError" class="error-msg">{{ signupError }}</div>
+      <button type="submit">S'inscrire</button>
+    </form>
+  </div>
+
+  <!-- Sign-In Form -->
+  <div class="form-container sign-in-container" *ngIf="isLoginFormActive">
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+      <h1>Se Connecter</h1>
+      <input required formControlName="mail" type="email" placeholder="Email">
+      <div *ngIf="loginForm.get('mail')!.invalid && loginForm.get('mail')?.touched" class="error-msg">
+        Invalid email format.
+      </div>
+
+      <input required formControlName="motDePasse" type="password" placeholder="Mot de Passe">
+      <div *ngIf="loginForm.get('motDePasse')!.invalid && loginForm.get('motDePasse')?.touched" class="error-msg">
+        Password is required.
+      </div>
+      <div *ngIf="loginError" class="error-msg">{{ loginError }}</div>
+      <a routerLink="/ForgetPass">Mot de Passe Oublié?</a>
+      <button type="submit">Se Connecter</button>
+    </form>
+  </div>
+
+  <!-- Overlay for switching forms -->
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us, please login with your personal info</p>
+        <button class="ghost" (click)="toggleForms(true)">Sign In</button> <!-- Trigger sign-in -->
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start your journey with us</p>
+        <button class="ghost" (click)="toggleForms(false)">Sign Up</button> <!-- Trigger sign-up -->
+      </div>
+    </div>
+  </div>
+</div>
